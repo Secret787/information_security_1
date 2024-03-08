@@ -1,0 +1,38 @@
+﻿<Window x:Class="information_security_1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:information_security_1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl Margin="0,0,-54,-42">
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="Caesar's Cipher"/>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <TextBox x:Name="tb2"    Margin="451,77,93,289" Height="30" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tb1"    Margin="122,77,422,289" Height="30" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Button  x:Name="bt1"    Content="Зашифровать"  Margin="172,151,422,215"  Width="200" Height="30" Click="func1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Button  x:Name="bt2"    Content="Расшифровать"  Margin="451,151,143,215"  Width="200" Height="30" Click="func2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBox x:Name="tb3"    Margin="377,151,348,215" Height="30" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Content="Шаг" HorizontalAlignment="Center" Height="31" Margin="404,136,370,260" VerticalAlignment="Center" Width="70"/>
+                        <Button  x:Name="b3"    Content="Сохраниить"  Margin="199,219,0,0"  Width="200" Height="30" Click="Save" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <Button  x:Name="b4"    Content="Загрузить"  Margin="478,219,0,0"  Width="200" Height="30" Click="Load" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+
+
+
+            <TabItem Header="Cipher 2">
+                Вторая вкладка
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
