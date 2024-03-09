@@ -7,6 +7,7 @@ using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Collections.Generic;
 
 namespace information_security_1
 {
@@ -152,12 +153,6 @@ namespace information_security_1
                     tb3.Text = s[1];
                 }
             }
-            StreamReader f = new StreamReader(arg0);
-            string[] s = f.ReadLine().Split('|');
-            f.Close();
-            tb1.Text = s[0];
-            tb3.Text = s[1];
-
         }
         public string AllLeters = "абвгдежзийклмнопрстуфхцшщъыьэюя";
         public void RusProbilities()
