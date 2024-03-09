@@ -14,7 +14,7 @@
                 </TabItem.Header>
                 <TabItem.Content>
                     <Grid>
-                        <TextBox x:Name="tb2"    Margin="451,77,93,289" Height="30" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tb2"    Margin="451,77,93,289" Height="30" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
                         <TextBox x:Name="tb1"    Margin="122,77,422,289" Height="30" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Button  x:Name="bt1"    Content="Зашифровать"  Margin="172,151,422,215"  Width="200" Height="30" Click="func1" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         <Button  x:Name="bt2"    Content="Расшифровать"  Margin="451,151,143,215"  Width="200" Height="30" Click="func2" HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -22,6 +22,8 @@
                         <Label Content="Шаг" HorizontalAlignment="Center" Height="31" Margin="404,136,370,260" VerticalAlignment="Center" Width="70"/>
                         <Button  x:Name="b3"    Content="Сохраниить"  Margin="199,219,0,0"  Width="200" Height="30" Click="Save" HorizontalAlignment="Left" VerticalAlignment="Top" />
                         <Button  x:Name="b4"    Content="Загрузить"  Margin="478,219,0,0"  Width="200" Height="30" Click="Load" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <Label Content="Введите исходный текст" HorizontalAlignment="Left" Margin="203,67,0,0" VerticalAlignment="Top"/>
+                        <Label Content="Результат" HorizontalAlignment="Left" Margin="572,67,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.516,0.591"/>
 
                     </Grid>
                 </TabItem.Content>

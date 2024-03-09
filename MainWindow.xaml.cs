@@ -1,19 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography.Xml;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace information_security_1
 {
@@ -81,13 +69,29 @@ namespace information_security_1
             return err;
 
         }
-        public static string arg0 = @"..\123.txt";
+        public static string arg0 = @"..\Data.txt";
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            if (func4())
+            string filename = "";
+            // Configure save file dialog box
+            var dialog = new Microsoft.Win32.SaveFileDialog();
+            dialog.FileName = "Document"; // Default file name
+            dialog.DefaultExt = ".txt"; // Default file extension
+            dialog.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+
+            // Show save file dialog box
+            bool? result = dialog.ShowDialog();
+
+            // Process save file dialog box results
+            if (result == true)
             {
-                StreamWriter f = new StreamWriter(arg0, false);
+                // Save document
+                filename = dialog.FileName;
+            }
+            if (filename != "")
+            {
+                StreamWriter f = new StreamWriter(filename, false);
                 f.WriteLine(tb1.Text + "|" + tb3.Text);
                 f.Close();
             }
@@ -95,12 +99,34 @@ namespace information_security_1
 
         private void Load(object sender, RoutedEventArgs e)
         {
-            StreamReader f = new StreamReader(arg0);
-            string[] s = f.ReadLine().Split('|');
-            f.Close();
-            tb1.Text = s[0];
-            tb3.Text = s[1];
+            string filename = "";
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.FileName = "Data"; // Default file name
+            dialog.DefaultExt = ".txt"; // Default file extension
+            dialog.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
 
+            // Show open file dialog box
+            bool? result = dialog.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                filename = dialog.FileName;
+            }
+            if (filename != "")
+            {
+                StreamReader f = new StreamReader(filename);
+                string first_line = f.ReadLine();
+                f.Close();
+                string pattern = @"[^|][|]\d+";
+                if (Regex.IsMatch(first_line, pattern, RegexOptions.IgnoreCase))
+                {
+                    string[] s = first_line.Split('|');
+                    tb1.Text = s[0];
+                    tb3.Text = s[1];
+                }
+            }
         }
     }
 }
