@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TabControl Margin="0,0,-54,-42">
+        <TabControl HorizontalAlignment="Left" Width="854" Height="476" VerticalAlignment="Top">
             <TabItem>
                 <TabItem.Header>
                     <Label Content="Caesar's Cipher"/>
@@ -22,6 +22,7 @@
                         <Label Content="Шаг" HorizontalAlignment="Center" Height="31" Margin="404,136,370,260" VerticalAlignment="Center" Width="70"/>
                         <Button  x:Name="b3"    Content="Сохраниить"  Margin="199,219,0,0"  Width="200" Height="30" Click="Save" HorizontalAlignment="Left" VerticalAlignment="Top" />
                         <Button  x:Name="b4"    Content="Загрузить"  Margin="478,219,0,0"  Width="200" Height="30" Click="Load" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <TextBox x:Name="tb4"    Margin="149,36,0,0" Height="30" Width="579" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <Label Content="Введите исходный текст" HorizontalAlignment="Left" Margin="203,67,0,0" VerticalAlignment="Top"/>
                         <Label Content="Результат" HorizontalAlignment="Left" Margin="572,67,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.516,0.591"/>
 
