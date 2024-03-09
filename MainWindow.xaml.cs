@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,14 +26,29 @@ namespace information_security_1
         public MainWindow()
         {
             InitializeComponent();
+            RusProbilities();
+
         }
 
         private void func1(object sender, RoutedEventArgs e)
         {
             tb2.Text = "";
             if (func4())
+            {
                 func3(Convert.ToInt32(tb3.Text), 1);
+                Symbol_probabilities(tb1.Text);
+                func5();
+                
+            }
+                    
         }
+
+        public Dictionary<char, double> letterProbability = new();
+        public Dictionary<char, double>    RusProbability = new();
+
+
+
+
 
         private void func2(object sender, RoutedEventArgs e)
         {
@@ -46,13 +62,18 @@ namespace information_security_1
                 shift -= 32;
             for (int i = 0; i < tb1.Text.Length; i++)
             {
-                int t = Convert.ToInt32(tb1.Text[i]) + shift * znak;
-                if (t > 1103)
-                    while (t > 1103)
-                        t -= 32;
-                if (t < 1072)
-                    while (t < 1072)
-                        t += 32;
+                int t = Convert.ToInt32(tb1.Text[i]);
+                if (!(tb1.Text[i] <= 57 && tb1.Text[i] >= 48 || tb1.Text[i] == 32))
+                {
+                    t = Convert.ToInt32(tb1.Text[i]) + shift * znak;
+                    if (t > 1103)
+                        while (t > 1103)
+                            t -= 32;
+                    if (t < 1072)
+                        while (t < 1072)
+                            t += 32;
+                }
+            
                 tb2.Text += Convert.ToChar(t);
 
             }
@@ -67,7 +88,7 @@ namespace information_security_1
                 {
                     for (int i = 0; i < tb1.Text.Length; i++)
                     {
-                        if (!(tb1.Text[i] <= 1103 && tb1.Text[i] >= 1072))
+                        if (!((tb1.Text[i] <= 1103 && tb1.Text[i] >= 1072) || (tb1.Text[i] <= 57 && tb1.Text[i]>= 48) || tb1.Text[i] == 32) )
                         {
                             err = false;
                             break;
@@ -101,6 +122,83 @@ namespace information_security_1
             tb1.Text = s[0];
             tb3.Text = s[1];
 
+        }
+        public string AllLeters = "абвгдежзийклмнопрстуфхцшщъыьэюя";
+        public void RusProbilities()
+        {
+          
+            RusProbability.Add('а', 8.04);
+            RusProbability.Add('б', 1.55);
+            RusProbability.Add('в', 4.75);
+            RusProbability.Add('г', 1.88);
+            RusProbability.Add('д', 2.95);
+            RusProbability.Add('е', 8.21);
+            RusProbability.Add('ж', 0.88);
+            RusProbability.Add('з', 1.61);
+            RusProbability.Add('и', 7.98);
+            RusProbability.Add('й', 1.36);
+            RusProbability.Add('к', 3.49);
+            RusProbability.Add('л', 4.32);
+            RusProbability.Add('м', 3.11);
+            RusProbability.Add('н', 6.72);
+            RusProbability.Add('о', 10.61);
+            RusProbability.Add('п', 2.82);
+            RusProbability.Add('р', 5.38);
+            RusProbability.Add('с', 5.71);
+            RusProbability.Add('т', 5.83);
+            RusProbability.Add('у', 2.28);
+            RusProbability.Add('ф', 0.41);
+            RusProbability.Add('х', 1.02);
+            RusProbability.Add('ц', 0.58);
+            RusProbability.Add('ч', 1.23);
+            RusProbability.Add('ш', 0.55);
+            RusProbability.Add('щ', 0.34);
+            RusProbability.Add('ъ', 0.03);
+            RusProbability.Add('ы', 1.91);
+            RusProbability.Add('ь', 1.39);
+            RusProbability.Add('э', 0.31);
+            RusProbability.Add('ю', 0.63);
+            RusProbability.Add('я', 2.00);
+
+
+        }
+        private void func5()
+        {
+            if (tb1.Text.Length > 10)
+                tb4.Text = tb1.Text.Substring(0, 10);
+            else
+                tb4.Text = tb1.Text;
+
+            double x = 0;
+            for (int i = 0; i < 31; i++)
+            {
+                
+                Char t = AllLeters[i];
+                if (tb1.Text.IndexOf(t) != -1)
+                    x += (letterProbability[t] - RusProbability[t]) * (letterProbability[t] - RusProbability[t]) / RusProbability[t];
+            }
+            tb4.Text += " | ";
+            tb4.Text += Math.Round(x,2).ToString();
+        }
+        private void Symbol_probabilities(string inputText)
+        {
+            string s = inputText;
+            for (int i = 0; i < s.Length; i++)
+                if (AllLeters.IndexOf(s[i]) == -1)
+                {
+                    s = s.Remove(i, 1);
+                    i--;
+                }
+            letterProbability = new();
+            int totalCharacters = s.Length;
+
+            foreach (char character in s)
+            {
+                if (letterProbability.ContainsKey(character)) { letterProbability[character] += 1.0 / totalCharacters; }
+                else { letterProbability[character] = 1.0 / totalCharacters; }
+            }
+
+            letterProbability = letterProbability.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         }
     }
 }
